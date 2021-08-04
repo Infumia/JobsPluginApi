@@ -16,28 +16,26 @@ public interface Work extends Callable {
   /**
    * creates a new instance of work.
    *
-   * @param employee the employee to create.
    * @param id the id to create.
    *
    * @return work.
    */
   @NotNull
-  static Optional<Work> get(@NotNull final Employee employee, @NotNull final String id) {
+  static Optional<Work> get(@NotNull final String id) {
     return Job.get(id)
-      .map(job -> Work.get(employee, job));
+      .map(Work::get);
   }
 
   /**
    * creates a new instance of work.
    *
-   * @param employee the employee to create.
    * @param job the job to create.
    *
    * @return work.
    */
   @NotNull
-  static Work get(@NotNull final Employee employee, @NotNull final Job job) {
-    return Works.get(employee, job);
+  static Work get(@NotNull final Job job) {
+    return Works.get(job);
   }
 
   /**
@@ -49,14 +47,6 @@ public interface Work extends Callable {
   default void accept(@NotNull final Event event, @NotNull final Employee employee) {
     this.getJob().accept(event, employee, this);
   }
-
-  /**
-   * obtains the employee.
-   *
-   * @return employee
-   */
-  @NotNull
-  Employee getEmployee();
 
   /**
    * obtains the exp.
@@ -97,24 +87,26 @@ public interface Work extends Callable {
   /**
    * sets the exp.
    *
+   * @param affected the affected to set.
    * @param exp the exp to set.
    *
    * @return {@code true} if the exp successfully changes.
    */
-  default boolean setExpWithEvent(final long exp) {
-    return Callable.callEvent(new EmployeeJobExpChangeEvent(this.getEmployee(), this, exp), event ->
+  default boolean setExpWithEvent(@NotNull final Employee affected, final long exp) {
+    return Callable.callEvent(new EmployeeJobExpChangeEvent(affected, this, exp), event ->
       this.setExp(event.getExp()));
   }
 
   /**
    * sets the level.
    *
+   * @param affected the affected to set.
    * @param level the level to set.
    *
    * @return {@code true} if the level successfully changes.
    */
-  default boolean setLevelWithEvent(final long level) {
-    return Callable.callEvent(new EmployeeJobLevelChangeEvent(this.getEmployee(), this, level), event ->
+  default boolean setLevelWithEvent(@NotNull final Employee affected, final long level) {
+    return Callable.callEvent(new EmployeeJobLevelChangeEvent(affected, this, level), event ->
       this.setLevel(event.getLevel()));
   }
 }

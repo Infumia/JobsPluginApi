@@ -11,11 +11,10 @@ public interface WorkCreator {
   /**
    * creates a new instance of work.
    *
-   * @param employee the employee to create.
    * @param job the job to create.
    *
    * @return work.
    */
   @NotNull
-  Work get(@NotNull Employee employee, @NotNull Job job);
+  Work get(@NotNull Job job);
 }

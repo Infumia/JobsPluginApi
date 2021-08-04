@@ -104,7 +104,7 @@ public interface Employee extends Callable {
    * @return {@code true} if player successfully join to the work.
    */
   default boolean addWorkWithEvent(@NotNull final Job job) {
-    return this.addWorkWithEvent(Work.get(this, job));
+    return this.addWorkWithEvent(Work.get(job));
   }
 
   /**
@@ -157,6 +157,31 @@ public interface Employee extends Callable {
    */
   @NotNull
   UUID getPlayerUniqueId();
+
+  /**
+   * gets the work.
+   *
+   * @param id the id to get.
+   *
+   * @return work.
+   */
+  @NotNull
+  default Optional<Work> getWork(@NotNull final String id) {
+    return Job.get(id)
+      .flatMap(this::getWork);
+  }
+
+  /**
+   * gets the work.
+   *
+   * @param work the work to get.
+   *
+   * @return work.
+   */
+  @NotNull
+  default Optional<Work> getWork(@NotNull final Work work) {
+    return this.getWork(work.getJob());
+  }
 
   /**
    * gets the work.

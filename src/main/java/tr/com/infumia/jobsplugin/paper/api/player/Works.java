@@ -32,14 +32,13 @@ public class Works {
   /**
    * creates a new instance of work.
    *
-   * @param employee the employee to create.
    * @param job the job to create.
    *
    * @return work.
    */
   @NotNull
-  static Work get(@NotNull final Employee employee, @NotNull final Job job) {
-    return Works.getWorkCreator().get(employee, job);
+  static Work get(@NotNull final Job job) {
+    return Works.getWorkCreator().get(job);
   }
 
   /**
