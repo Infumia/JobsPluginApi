@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.work;
+package tr.com.infumia.jobsplugin.paper.api.employee;
 
 import java.util.Optional;
 import lombok.AccessLevel;
@@ -8,7 +8,6 @@ import lombok.Setter;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
-import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobExpChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobLevelChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;

@@ -15,7 +15,6 @@ import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeLoadEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
-import tr.com.infumia.jobsplugin.paper.api.work.Work;
 
 /**
  * an interface to determine player jobs.
