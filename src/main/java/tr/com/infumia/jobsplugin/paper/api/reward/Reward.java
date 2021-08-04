@@ -1,11 +1,11 @@
-package tr.com.infumia.jobsplugin.paper.api.job;
+package tr.com.infumia.jobsplugin.paper.api.reward;
 
 import org.jetbrains.annotations.NotNull;
 
 /**
- * an interface to determine jobs.
+ * an interface to determine rewards.
  */
-public interface Job {
+public interface Reward {
 
   /**
    * obtains the id.

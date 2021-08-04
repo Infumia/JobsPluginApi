@@ -15,6 +15,13 @@ import tr.com.infumia.jobsplugin.paper.api.job.Job;
 public interface JobPlayer {
 
   /**
+   * adds the job.
+   *
+   * @param job the job to add.
+   */
+  void addJob(@NotNull Job job);
+
+  /**
    * gets the job.
    *
    * @param id the id to get.
