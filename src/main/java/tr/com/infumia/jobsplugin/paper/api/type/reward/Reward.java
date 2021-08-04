@@ -18,12 +18,28 @@ import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 public interface Reward extends TypeSerializer<Reward> {
 
   /**
+   * obtains the description.
+   *
+   * @return description.
+   */
+  @NotNull
+  String getDescription();
+
+  /**
    * obtains the id.
    *
    * @return id.
    */
   @NotNull
   String getId();
+
+  /**
+   * obtains the name.
+   *
+   * @return name.
+   */
+  @NotNull
+  String getName();
 
   /**
    * gives the reward to the player.

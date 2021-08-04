@@ -39,6 +39,14 @@ public interface Job extends TypeSerializer<Job> {
   void addMission(@NotNull Mission mission);
 
   /**
+   * obtains the description.
+   *
+   * @return description.
+   */
+  @NotNull
+  String getDescription();
+
+  /**
    * obtains the id.
    *
    * @return id.
@@ -63,6 +71,14 @@ public interface Job extends TypeSerializer<Job> {
    */
   @NotNull
   Collection<Mission> getMissions();
+
+  /**
+   * obtains the name.
+   *
+   * @return name.
+   */
+  @NotNull
+  String getName();
 
   /**
    * removes the mission.

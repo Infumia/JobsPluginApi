@@ -70,12 +70,28 @@ public interface Mission extends TypeSerializer<Mission> {
   Collection<Condition> getConditions();
 
   /**
+   * obtains the description.
+   *
+   * @return description.
+   */
+  @NotNull
+  String getDescription();
+
+  /**
    * obtains the id.
    *
    * @return id.
    */
   @NotNull
   String getId();
+
+  /**
+   * obtains the name.
+   *
+   * @return name.
+   */
+  @NotNull
+  String getName();
 
   /**
    * gets the reward.

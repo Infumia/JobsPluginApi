@@ -99,6 +99,12 @@ public interface Employee {
     return Optional.ofNullable(Bukkit.getPlayer(this.getPlayerUniqueId()));
   }
 
+  @NotNull
+  default String getPlayerName() {
+    final var name = this.getOfflinePlayer().getName();
+    return name == null ? this.getPlayerUniqueId().toString() : name;
+  }
+
   /**
    * obtains the player unique id.
    *

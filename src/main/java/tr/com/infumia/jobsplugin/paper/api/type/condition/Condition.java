@@ -30,12 +30,28 @@ public interface Condition extends TypeSerializer<Condition> {
   boolean condition(@NotNull Event event, @NotNull Employee employee, @NotNull Work work, @NotNull Mission mission);
 
   /**
+   * obtains the description.
+   *
+   * @return description.
+   */
+  @NotNull
+  String getDescription();
+
+  /**
    * obtains the id.
    *
    * @return id.
    */
   @NotNull
   String getId();
+
+  /**
+   * obtains the name.
+   *
+   * @return name.
+   */
+  @NotNull
+  String getName();
 
   /**
    * an interface to determine serializers for {@link Condition}.
