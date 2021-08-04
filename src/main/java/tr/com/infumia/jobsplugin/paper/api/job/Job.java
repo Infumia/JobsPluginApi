@@ -1,7 +1,12 @@
 package tr.com.infumia.jobsplugin.paper.api.job;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,8 +16,8 @@ import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
 import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
+import tr.com.infumia.jobsplugin.paper.api.employee.Work;
 import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
-import tr.com.infumia.jobsplugin.paper.api.work.Work;
 
 /**
  * an interface to determine jobs.
@@ -118,6 +123,62 @@ public interface Job extends TypeSerializer<Job>, IdNameDescription {
     @Override
     default boolean supports(@NotNull final Class<?> cls) {
       return Job.class.isAssignableFrom(cls);
+    }
+  }
+
+  /**
+   * an abstract implementation for {@link Job}.
+   */
+  @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+  abstract class Base implements Job {
+
+    /**
+     * the description.
+     */
+    @NotNull
+    @Getter
+    private final String description;
+
+    /**
+     * the id.
+     */
+    @NotNull
+    @Getter
+    private final String id;
+
+    /**
+     * the missions.
+     */
+    @NotNull
+    private final Map<String, Mission> missions;
+
+    /**
+     * the name.
+     */
+    @NotNull
+    @Getter
+    private final String name;
+
+    @Override
+    public final void addMission(@NotNull final Mission mission) {
+      this.missions.put(mission.getId(), mission);
+    }
+
+    @NotNull
+    @Override
+    public final Optional<Mission> getMission(@NotNull final String id) {
+      return Optional.ofNullable(this.missions.get(id));
+    }
+
+    @NotNull
+    @Override
+    public final Collection<Mission> getMissions() {
+      return Collections.unmodifiableCollection(this.missions.values());
+    }
+
+    @Override
+    public final void removeMission(@NotNull final String id) {
+      this.missions.remove(id);
     }
   }
 }

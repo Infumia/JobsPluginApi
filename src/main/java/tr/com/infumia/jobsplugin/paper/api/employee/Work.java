@@ -1,10 +1,13 @@
-package tr.com.infumia.jobsplugin.paper.api.work;
+package tr.com.infumia.jobsplugin.paper.api.employee;
 
 import java.util.Optional;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
-import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobExpChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobLevelChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
@@ -23,9 +26,9 @@ public interface Work extends Callable {
    * @return work.
    */
   @NotNull
-  static Optional<Work> get(@NotNull final String id) {
+  static Optional<Work> of(@NotNull final String id) {
     return Job.get(id)
-      .map(Work::get);
+      .map(Work::of);
   }
 
   /**
@@ -36,8 +39,22 @@ public interface Work extends Callable {
    * @return work.
    */
   @NotNull
-  static Work get(@NotNull final Job job) {
-    return Works.get(job);
+  static Work of(@NotNull final Job job) {
+    return new Impl(job);
+  }
+
+  /**
+   * creates a new instance of work.
+   *
+   * @param job the job to create.
+   * @param exp the exp to create.
+   * @param level the level to create.
+   *
+   * @return work.
+   */
+  @NotNull
+  static Work of(@NotNull final Job job, final long exp, final long level) {
+    return new Impl(job, exp, level);
   }
 
   /**
@@ -113,5 +130,40 @@ public interface Work extends Callable {
                                     final long level) {
     return Callable.callEvent(new EmployeeJobLevelChangeEvent(affected, this, mission, level), event ->
       event.getWork().setLevel(event.getLevel()));
+  }
+
+  /**
+   * a simple implementation for {@link Work}.
+   */
+  @Getter
+  @AllArgsConstructor(access = AccessLevel.PRIVATE)
+  final class Impl implements Work {
+
+    /**
+     * the job.
+     */
+    @NotNull
+    private final Job job;
+
+    /**
+     * the exp.
+     */
+    @Setter
+    private long exp;
+
+    /**
+     * the level.
+     */
+    @Setter
+    private long level;
+
+    /**
+     * ctor.
+     *
+     * @param job the job.
+     */
+    private Impl(@NotNull final Job job) {
+      this.job = job;
+    }
   }
 }

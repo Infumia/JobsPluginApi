@@ -22,20 +22,20 @@ abstract class EmployeeEvent extends Event {
   /**
    * ctor.
    *
-   * @param employee the employee.
-   */
-  EmployeeEvent(@NotNull final Employee employee) {
-    this.employee = employee;
-  }
-
-  /**
-   * ctor.
-   *
    * @param isAsync the is async.
    * @param employee the employee.
    */
   EmployeeEvent(final boolean isAsync, @NotNull final Employee employee) {
     super(isAsync);
     this.employee = employee;
+  }
+
+  /**
+   * ctor.
+   *
+   * @param employee the employee.
+   */
+  EmployeeEvent(@NotNull final Employee employee) {
+    this(false, employee);
   }
 }

@@ -10,15 +10,29 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
+import tr.com.infumia.jobsplugin.paper.api.event.EmployeeCloseEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
+import tr.com.infumia.jobsplugin.paper.api.event.EmployeeLoadEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
-import tr.com.infumia.jobsplugin.paper.api.work.Work;
 
 /**
  * an interface to determine player jobs.
  */
 public interface Employee extends Callable {
+
+  /**
+   * closes the employee, runs when the player quits from the server.
+   *
+   * @param employee the employee to close.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  static CompletableFuture<Void> close(@NotNull final Employee employee) {
+    return Employees.close(employee).whenCompleteAsync((unused, throwable) ->
+      new EmployeeCloseEvent(employee).callEvent());
+  }
 
   /**
    * gets employee or creates it.
@@ -41,7 +55,11 @@ public interface Employee extends Callable {
    */
   @NotNull
   static CompletableFuture<@NotNull Employee> load(@NotNull final UUID uniqueId) {
-    return Employees.load(uniqueId);
+    return Employees.load(uniqueId).thenApply(employee -> {
+      final var employeeLoadEvent = new EmployeeLoadEvent(employee);
+      employeeLoadEvent.callEvent();
+      return employeeLoadEvent.getEmployee();
+    });
   }
 
   /**
@@ -105,7 +123,7 @@ public interface Employee extends Callable {
    * @return {@code true} if player successfully join to the work.
    */
   default boolean addWorkWithEvent(@NotNull final Job job) {
-    return this.addWorkWithEvent(Work.get(job));
+    return this.addWorkWithEvent(Work.of(job));
   }
 
   /**
@@ -118,6 +136,16 @@ public interface Employee extends Callable {
   default boolean addWorkWithEvent(@NotNull final Work work) {
     return Callable.callEvent(new EmployeeJoinJobEvent(this, work), event ->
       event.getEmployee().addWork(event.getWork()));
+  }
+
+  /**
+   * closes the employee, runs when the player quits from the server.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  default CompletableFuture<Void> close() {
+    return Employee.close(this);
   }
 
   /**

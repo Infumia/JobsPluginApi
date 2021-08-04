@@ -1,7 +1,7 @@
 package tr.com.infumia.jobsplugin.paper.api.employee;
 
+import com.google.common.collect.Sets;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,13 +26,26 @@ public class Employees {
   /**
    * the employees.
    */
-  private final Collection<Employee> EMPLOYEES_SET = new HashSet<>();
+  private final Collection<Employee> EMPLOYEES_SET = Sets.newConcurrentHashSet();
 
   /**
    * the employee creator.
    */
   @Nullable
   private EmployeeCreator employeeCreator;
+
+  /**
+   * closes the employee, runs when the player quits from the server.
+   *
+   * @param employee the employee to close.
+   *
+   * @return completed future.
+   */
+  CompletableFuture<Void> close(@NotNull final Employee employee) {
+    Employees.EMPLOYEES.remove(employee.getPlayerUniqueId());
+    Employees.EMPLOYEES_SET.remove(employee);
+    return Employees.save(employee);
+  }
 
   /**
    * gets employee or creates it.
@@ -64,10 +77,10 @@ public class Employees {
     return Optional.ofNullable(Employees.EMPLOYEES.get(uniqueId))
       .map(CompletableFuture::completedFuture)
       .orElseGet(() ->
-        Employees.provideEmployee(uniqueId).whenComplete((employee, throwable) -> {
+        Employees.provideEmployee(uniqueId).whenCompleteAsync((employee, throwable) -> {
           final var newly = Objects.requireNonNullElseGet(employee, () -> Employees.createEmployee(uniqueId));
           Employees.EMPLOYEES.put(uniqueId, newly);
-          Employees.EMPLOYEES_SET.add(employee);
+          Employees.EMPLOYEES_SET.add(newly);
         }));
   }
 
