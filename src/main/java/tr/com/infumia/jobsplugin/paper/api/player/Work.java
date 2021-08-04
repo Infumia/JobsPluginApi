@@ -13,6 +13,7 @@ public interface Work {
    * runs the job.
    *
    * @param event the event to run.
+   * @param employee the employee.
    */
   default void accept(@NotNull final Event event, @NotNull final Employee employee) {
     this.getJob().accept(event, employee, this);
