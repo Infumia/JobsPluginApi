@@ -7,6 +7,7 @@ import tr.com.infumia.jobsplugin.paper.api.Callable;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobExpChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobLevelChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 
 /**
  * an interface to determine works.
@@ -92,8 +93,8 @@ public interface Work extends Callable {
    *
    * @return {@code true} if the exp successfully changes.
    */
-  default boolean setExpWithEvent(@NotNull final Employee affected, final long exp) {
-    return Callable.callEvent(new EmployeeJobExpChangeEvent(affected, this, exp), event ->
+  default boolean setExpWithEvent(@NotNull final Employee affected, @NotNull final Mission mission, final long exp) {
+    return Callable.callEvent(new EmployeeJobExpChangeEvent(affected, this, mission, exp), event ->
       this.setExp(event.getExp()));
   }
 
@@ -105,8 +106,9 @@ public interface Work extends Callable {
    *
    * @return {@code true} if the level successfully changes.
    */
-  default boolean setLevelWithEvent(@NotNull final Employee affected, final long level) {
-    return Callable.callEvent(new EmployeeJobLevelChangeEvent(affected, this, level), event ->
+  default boolean setLevelWithEvent(@NotNull final Employee affected, @NotNull final Mission mission,
+                                    final long level) {
+    return Callable.callEvent(new EmployeeJobLevelChangeEvent(affected, this, mission, level), event ->
       this.setLevel(event.getLevel()));
   }
 }

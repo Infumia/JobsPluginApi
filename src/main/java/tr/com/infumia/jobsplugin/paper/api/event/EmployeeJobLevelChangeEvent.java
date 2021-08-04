@@ -6,6 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.player.Work;
+import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 
 /**
  * a class that represents employee job level change events which fire when level of the player's job change.
@@ -26,6 +27,14 @@ public final class EmployeeJobLevelChangeEvent extends EmployeeEvent {
   private long level;
 
   /**
+   * the missions.
+   */
+  @NotNull
+  @Getter
+  @Setter
+  private Mission mission;
+
+  /**
    * the work.
    */
   @NotNull
@@ -38,11 +47,14 @@ public final class EmployeeJobLevelChangeEvent extends EmployeeEvent {
    *
    * @param employee the employee.
    * @param work the work.
+   * @param mission the mission.
    * @param level the level.
    */
-  public EmployeeJobLevelChangeEvent(@NotNull final Employee employee, @NotNull final Work work, final long level) {
+  public EmployeeJobLevelChangeEvent(@NotNull final Employee employee, @NotNull final Work work,
+                                     @NotNull final Mission mission, final long level) {
     super(employee);
     this.work = work;
+    this.mission = mission;
     this.level = level;
   }
 
