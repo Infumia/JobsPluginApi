@@ -20,23 +20,6 @@ import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 public interface Employee {
 
   /**
-   * calls the given event then, if it's succeed runs the consumer.
-   *
-   * @param event the event to call.
-   * @param consumer the consumer to call.
-   * @param <E> type of the event.
-   *
-   * @return {@code true} if the event called successfully.
-   */
-  static <E extends Event> boolean callEvent(@NotNull final E event, @NotNull final Consumer<E> consumer) {
-    if (event.callEvent()) {
-      consumer.accept(event);
-      return true;
-    }
-    return false;
-  }
-
-  /**
    * gets employee or creates it.
    *
    * @param uniqueId the unique id to get.
@@ -80,6 +63,23 @@ public interface Employee {
   @NotNull
   static CompletableFuture<Void> saveAll() {
     return Employees.saveAll();
+  }
+
+  /**
+   * calls the given event then, if it's succeed runs the consumer.
+   *
+   * @param event the event to call.
+   * @param consumer the consumer to call.
+   * @param <E> type of the event.
+   *
+   * @return {@code true} if the event called successfully.
+   */
+  private static <E extends Event> boolean callEvent(@NotNull final E event, @NotNull final Consumer<E> consumer) {
+    if (event.callEvent()) {
+      consumer.accept(event);
+      return true;
+    }
+    return false;
   }
 
   /**
