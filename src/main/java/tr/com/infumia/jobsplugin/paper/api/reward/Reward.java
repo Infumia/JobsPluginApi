@@ -35,6 +35,13 @@ public interface Reward {
   void reward(@NotNull Event event, @NotNull Employee employee, @NotNull Job job, @NotNull Mission mission);
 
   /**
+   * serializes condition.
+   *
+   * @param data the data to serialize.
+   */
+  void serialize(@NotNull TransformedData data);
+
+  /**
    * an interface to determine serializers for {@link Reward}.
    */
   interface Serializer extends ObjectSerializer<Reward> {
@@ -44,6 +51,11 @@ public interface Reward {
     default Optional<Reward> deserialize(@NotNull final Reward field, @NotNull final TransformedData transformedData,
                                          @Nullable final GenericDeclaration declaration) {
       return this.deserialize(transformedData, declaration);
+    }
+
+    @Override
+    default void serialize(@NotNull final Reward reward, @NotNull final TransformedData transformedData) {
+      reward.serialize(transformedData);
     }
 
     @Override

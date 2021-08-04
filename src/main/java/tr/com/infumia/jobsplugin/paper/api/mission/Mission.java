@@ -109,6 +109,13 @@ public interface Mission {
   void removeReward(@NotNull String id);
 
   /**
+   * serializes condition.
+   *
+   * @param data the data to serialize.
+   */
+  void serialize(@NotNull TransformedData data);
+
+  /**
    * an interface to determine serializers for {@link Mission}.
    */
   interface Serializer extends ObjectSerializer<Mission> {
@@ -118,6 +125,11 @@ public interface Mission {
     default Optional<Mission> deserialize(@NotNull final Mission field, @NotNull final TransformedData transformedData,
                                           @Nullable final GenericDeclaration declaration) {
       return this.deserialize(transformedData, declaration);
+    }
+
+    @Override
+    default void serialize(@NotNull final Mission mission, @NotNull final TransformedData transformedData) {
+      mission.serialize(transformedData);
     }
 
     @Override

@@ -69,6 +69,13 @@ public interface Job {
   void removeMission(@NotNull String id);
 
   /**
+   * serializes condition.
+   *
+   * @param data the data to serialize.
+   */
+  void serialize(@NotNull TransformedData data);
+
+  /**
    * an interface to determine serializers for {@link Job}.
    */
   interface Serializer extends ObjectSerializer<Job> {
@@ -78,6 +85,11 @@ public interface Job {
     default Optional<Job> deserialize(@NotNull final Job field, @NotNull final TransformedData transformedData,
                                       @Nullable final GenericDeclaration declaration) {
       return this.deserialize(transformedData, declaration);
+    }
+
+    @Override
+    default void serialize(@NotNull final Job job, @NotNull final TransformedData transformedData) {
+      job.serialize(transformedData);
     }
 
     @Override

@@ -37,6 +37,13 @@ public interface Condition {
   String getId();
 
   /**
+   * serializes condition.
+   *
+   * @param data the data to serialize.
+   */
+  void serialize(@NotNull TransformedData data);
+
+  /**
    * an interface to determine serializers for {@link Condition}.
    */
   interface Serializer extends ObjectSerializer<Condition> {
@@ -47,6 +54,11 @@ public interface Condition {
                                             @NotNull final TransformedData transformedData,
                                             @Nullable final GenericDeclaration declaration) {
       return this.deserialize(transformedData, declaration);
+    }
+
+    @Override
+    default void serialize(@NotNull final Condition condition, @NotNull final TransformedData transformedData) {
+      condition.serialize(transformedData);
     }
 
     @Override
