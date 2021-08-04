@@ -1,16 +1,36 @@
 package tr.com.infumia.jobsplugin.paper.api.player;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import tr.com.infumia.jobsplugin.paper.api.type.Job;
 
 /**
  * an interface to determine player jobs.
  */
-public interface PlayerJob {
+public interface JobPlayer {
+
+  /**
+   * gets the job.
+   *
+   * @param id the id to get.
+   *
+   * @return jobs.
+   */
+  @NotNull
+  Optional<Job> getJob(@NotNull String id);
+
+  /**
+   * obtains the jobs.
+   *
+   * @return jobs.
+   */
+  @NotNull
+  Collection<Job> getJobs();
 
   /**
    * obtains the offline player.
@@ -39,4 +59,11 @@ public interface PlayerJob {
    */
   @NotNull
   UUID getPlayerUniqueId();
+
+  /**
+   * removes the job.
+   *
+   * @param id the id to remove.
+   */
+  void removeJob(@NotNull String id);
 }
