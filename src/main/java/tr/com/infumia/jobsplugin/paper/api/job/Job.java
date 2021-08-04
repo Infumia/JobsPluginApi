@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.type;
+package tr.com.infumia.jobsplugin.paper.api.job;
 
 /**
  * an interface to determine jobs.

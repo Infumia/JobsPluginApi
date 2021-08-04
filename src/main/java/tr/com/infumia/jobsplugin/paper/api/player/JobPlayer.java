@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import tr.com.infumia.jobsplugin.paper.api.type.Job;
+import tr.com.infumia.jobsplugin.paper.api.job.Job;
 
 /**
  * an interface to determine player jobs.
