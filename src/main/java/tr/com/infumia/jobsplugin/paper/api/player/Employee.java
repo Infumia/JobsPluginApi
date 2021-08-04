@@ -3,6 +3,7 @@ package tr.com.infumia.jobsplugin.paper.api.player;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -13,6 +14,30 @@ import org.jetbrains.annotations.NotNull;
  * an interface to determine player jobs.
  */
 public interface Employee {
+
+  /**
+   * gets employee or creates it.
+   *
+   * @param uniqueId the unique id to get.
+   *
+   * @return employee.
+   */
+  @NotNull
+  static Employee getOrCreate(@NotNull final UUID uniqueId) {
+    return Employees.getOrCreate(uniqueId);
+  }
+
+  /**
+   * gets the employee if exist otherwise, creates and returns.
+   *
+   * @param uniqueId the unique id to get.
+   *
+   * @return employee.
+   */
+  @NotNull
+  static CompletableFuture<@NotNull Employee> load(@NotNull final UUID uniqueId) {
+    return Employees.load(uniqueId);
+  }
 
   /**
    * runs all the works.
