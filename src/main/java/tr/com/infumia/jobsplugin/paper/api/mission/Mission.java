@@ -2,14 +2,35 @@ package tr.com.infumia.jobsplugin.paper.api.mission;
 
 import java.util.Collection;
 import java.util.Optional;
+import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.condition.Condition;
+import tr.com.infumia.jobsplugin.paper.api.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.reward.Reward;
 
 /**
  * an interface to determine missions.
  */
 public interface Mission {
+
+  /**
+   * runs all the conditions and rewards.
+   *
+   * @param job the job to run.
+   * @param employee the employee to run.
+   * @param event the event to run.
+   */
+  default void accept(@NotNull final Event event, @NotNull final Employee employee, @NotNull final Job job) {
+    for (final var condition : this.getConditions()) {
+      if (!condition.condition(event, employee, job, this)) {
+        return;
+      }
+    }
+    for (final var reward : this.getRewards()) {
+      reward.reward(event, employee, job, this);
+    }
+  }
 
   /**
    * adds the condition.
@@ -41,7 +62,7 @@ public interface Mission {
    * @return conditions.
    */
   @NotNull
-  Collection<Reward> getConditions();
+  Collection<Condition> getConditions();
 
   /**
    * obtains the id.

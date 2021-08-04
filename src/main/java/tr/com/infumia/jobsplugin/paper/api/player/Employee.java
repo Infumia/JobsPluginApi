@@ -7,37 +7,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import tr.com.infumia.jobsplugin.paper.api.job.Job;
 
 /**
  * an interface to determine player jobs.
  */
-public interface JobPlayer {
+public interface Employee {
 
   /**
-   * adds the job.
+   * adds the work.
    *
-   * @param job the job to add.
+   * @param work the work to add.
    */
-  void addJob(@NotNull Job job);
-
-  /**
-   * gets the job.
-   *
-   * @param id the id to get.
-   *
-   * @return jobs.
-   */
-  @NotNull
-  Optional<Job> getJob(@NotNull String id);
-
-  /**
-   * obtains the jobs.
-   *
-   * @return jobs.
-   */
-  @NotNull
-  Collection<Job> getJobs();
+  void addWork(@NotNull Work work);
 
   /**
    * obtains the offline player.
@@ -68,9 +49,27 @@ public interface JobPlayer {
   UUID getPlayerUniqueId();
 
   /**
-   * removes the job.
+   * gets the work.
+   *
+   * @param id the id to get.
+   *
+   * @return work.
+   */
+  @NotNull
+  Optional<Work> getWork(@NotNull String id);
+
+  /**
+   * obtains the works.
+   *
+   * @return works.
+   */
+  @NotNull
+  Collection<Work> getWorks();
+
+  /**
+   * removes the work.
    *
    * @param id the id to remove.
    */
-  void removeJob(@NotNull String id);
+  void removeWork(@NotNull String id);
 }
