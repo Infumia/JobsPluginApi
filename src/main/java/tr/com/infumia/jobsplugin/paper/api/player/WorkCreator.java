@@ -1,7 +1,7 @@
 package tr.com.infumia.jobsplugin.paper.api.player;
 
 import org.jetbrains.annotations.NotNull;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.job.Job;
 
 /**
  * an interface to determine work creator.

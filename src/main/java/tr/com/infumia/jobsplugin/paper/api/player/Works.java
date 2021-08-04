@@ -4,7 +4,7 @@ import java.util.Objects;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.job.Job;
 
 /**
  * an utility class that contains methods for {@link Job}.

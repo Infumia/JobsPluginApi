@@ -1,6 +1,7 @@
 package tr.com.infumia.jobsplugin.paper.api.event;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
@@ -15,7 +16,8 @@ abstract class EmployeeEvent extends Event {
    */
   @NotNull
   @Getter
-  private final Employee employee;
+  @Setter
+  private Employee employee;
 
   /**
    * ctor.

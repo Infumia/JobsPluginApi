@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.type.condition;
+package tr.com.infumia.jobsplugin.paper.api.condition;
 
 import java.util.Map;
 import java.util.Optional;

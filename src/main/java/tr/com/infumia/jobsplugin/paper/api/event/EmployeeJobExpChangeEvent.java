@@ -6,7 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.player.Work;
-import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * a class that represents employee job exp change events which fire when exp of the player's job change.

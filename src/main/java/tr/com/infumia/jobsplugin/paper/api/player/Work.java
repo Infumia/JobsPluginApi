@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobExpChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobLevelChangeEvent;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
-import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * an interface to determine works.
@@ -95,7 +95,7 @@ public interface Work extends Callable {
    */
   default boolean setExpWithEvent(@NotNull final Employee affected, @NotNull final Mission mission, final long exp) {
     return Callable.callEvent(new EmployeeJobExpChangeEvent(affected, this, mission, exp), event ->
-      this.setExp(event.getExp()));
+      event.getWork().setExp(event.getExp()));
   }
 
   /**
@@ -109,6 +109,6 @@ public interface Work extends Callable {
   default boolean setLevelWithEvent(@NotNull final Employee affected, @NotNull final Mission mission,
                                     final long level) {
     return Callable.callEvent(new EmployeeJobLevelChangeEvent(affected, this, mission, level), event ->
-      this.setLevel(event.getLevel()));
+      event.getWork().setLevel(event.getLevel()));
   }
 }

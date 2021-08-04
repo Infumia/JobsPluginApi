@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.type.reward;
+package tr.com.infumia.jobsplugin.paper.api.reward;
 
 import java.util.Optional;
 import org.bukkit.event.Event;
@@ -10,8 +10,8 @@ import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.player.Work;
-import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
-import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
+import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * an interface to determine rewards.
