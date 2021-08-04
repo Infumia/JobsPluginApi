@@ -4,7 +4,10 @@ import java.util.Collection;
 import java.util.Optional;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
+import tr.com.infumia.infumialib.transformer.TransformedData;
+import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.condition.Condition;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
@@ -110,5 +113,16 @@ public interface Mission {
    */
   interface Serializer extends ObjectSerializer<Mission> {
 
+    @NotNull
+    @Override
+    default Optional<Mission> deserialize(@NotNull final Mission field, @NotNull final TransformedData transformedData,
+                                          @Nullable final GenericDeclaration declaration) {
+      return this.deserialize(transformedData, declaration);
+    }
+
+    @Override
+    default boolean supports(@NotNull final Class<?> cls) {
+      return Mission.class.isAssignableFrom(cls);
+    }
   }
 }
