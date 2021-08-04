@@ -8,10 +8,10 @@ import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
-import tr.com.infumia.jobsplugin.paper.api.player.Employee;
-import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.player.Work;
 
 /**
  * an interface to determine conditions.

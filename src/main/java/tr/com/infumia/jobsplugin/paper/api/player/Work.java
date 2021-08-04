@@ -89,6 +89,7 @@ public interface Work extends Callable {
    * sets the exp.
    *
    * @param affected the affected to set.
+   * @param mission the mission to set.
    * @param exp the exp to set.
    *
    * @return {@code true} if the exp successfully changes.
@@ -102,6 +103,7 @@ public interface Work extends Callable {
    * sets the level.
    *
    * @param affected the affected to set.
+   * @param mission the mission to set.
    * @param level the level to set.
    *
    * @return {@code true} if the level successfully changes.
