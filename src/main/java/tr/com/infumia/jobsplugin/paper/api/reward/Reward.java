@@ -10,8 +10,8 @@ import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
 import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 import tr.com.infumia.jobsplugin.paper.api.employee.Work;
+import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * an interface to determine rewards.

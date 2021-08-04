@@ -17,8 +17,8 @@ import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
 import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.condition.Condition;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
-import tr.com.infumia.jobsplugin.paper.api.reward.Reward;
 import tr.com.infumia.jobsplugin.paper.api.employee.Work;
+import tr.com.infumia.jobsplugin.paper.api.reward.Reward;
 
 /**
  * an interface to determine missions.
