@@ -4,12 +4,12 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
+import tr.com.infumia.jobsplugin.paper.api.Callable;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
@@ -17,7 +17,7 @@ import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 /**
  * an interface to determine player jobs.
  */
-public interface Employee {
+public interface Employee extends Callable {
 
   /**
    * gets employee or creates it.
@@ -66,23 +66,6 @@ public interface Employee {
   }
 
   /**
-   * calls the given event then, if it's succeed runs the consumer.
-   *
-   * @param event the event to call.
-   * @param consumer the consumer to call.
-   * @param <E> type of the event.
-   *
-   * @return {@code true} if the event called successfully.
-   */
-  private static <E extends Event> boolean callEvent(@NotNull final E event, @NotNull final Consumer<E> consumer) {
-    if (event.callEvent()) {
-      consumer.accept(event);
-      return true;
-    }
-    return false;
-  }
-
-  /**
    * runs all the works.
    *
    * @param event the event to run.
@@ -121,7 +104,7 @@ public interface Employee {
    * @return {@code true} if player successfully join to the work.
    */
   default boolean addWorkWithEvent(@NotNull final Job job) {
-    return this.addWorkWithEvent(Work.get(job));
+    return this.addWorkWithEvent(Work.get(this, job));
   }
 
   /**
@@ -132,7 +115,7 @@ public interface Employee {
    * @return {@code true} if player successfully join to the work.
    */
   default boolean addWorkWithEvent(@NotNull final Work work) {
-    return Employee.callEvent(new EmployeeJoinJobEvent(this, work), event ->
+    return Callable.callEvent(new EmployeeJoinJobEvent(this, work), event ->
       this.addWork(work));
   }
 
@@ -234,7 +217,7 @@ public interface Employee {
    * @return {@code true} if player successfully quit from the work.
    */
   default boolean removeWorkWithEvent(@NotNull final Work work) {
-    return Employee.callEvent(new EmployeeQuitJobEvent(this, work), event ->
+    return Callable.callEvent(new EmployeeQuitJobEvent(this, work), event ->
       this.removeWork(work));
   }
 
