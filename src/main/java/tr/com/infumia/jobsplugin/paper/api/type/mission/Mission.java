@@ -9,9 +9,9 @@ import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.type.condition.Condition;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.type.reward.Reward;
 
 /**
@@ -22,18 +22,18 @@ public interface Mission extends TypeSerializer<Mission> {
   /**
    * runs all the conditions and rewards.
    *
-   * @param job the job to run.
-   * @param employee the employee to run.
    * @param event the event to run.
+   * @param employee the employee to run.
+   * @param work the work to run.
    */
-  default void accept(@NotNull final Event event, @NotNull final Employee employee, @NotNull final Job job) {
+  default void accept(@NotNull final Event event, @NotNull final Employee employee, @NotNull final Work work) {
     for (final var condition : this.getConditions()) {
-      if (!condition.condition(event, employee, job, this)) {
+      if (!condition.condition(event, employee, work, this)) {
         return;
       }
     }
     for (final var reward : this.getRewards()) {
-      reward.reward(event, employee, job, this);
+      reward.reward(event, employee, work, this);
     }
   }
 

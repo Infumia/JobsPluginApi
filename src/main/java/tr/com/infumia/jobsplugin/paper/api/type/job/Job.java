@@ -9,6 +9,7 @@ import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 
@@ -22,10 +23,11 @@ public interface Job extends TypeSerializer<Job> {
    *
    * @param event the event to run.
    * @param employee the employee to run.
+   * @param work the work to run.
    */
-  default void accept(@NotNull final Event event, @NotNull final Employee employee) {
+  default void accept(@NotNull final Event event, @NotNull final Employee employee, @NotNull final Work work) {
     for (final var mission : this.getMissions()) {
-      mission.accept(event, employee, this);
+      mission.accept(event, employee, work);
     }
   }
 

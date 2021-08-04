@@ -1,5 +1,6 @@
 package tr.com.infumia.jobsplugin.paper.api.player;
 
+import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 
@@ -7,6 +8,15 @@ import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
  * an interface to determine works.
  */
 public interface Work {
+
+  /**
+   * runs the job.
+   *
+   * @param event the event to run.
+   */
+  default void accept(@NotNull final Event event, @NotNull final Employee employee) {
+    this.getJob().accept(event, employee, this);
+  }
 
   /**
    * obtains the exp.

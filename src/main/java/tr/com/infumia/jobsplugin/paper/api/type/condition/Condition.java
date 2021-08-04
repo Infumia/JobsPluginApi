@@ -8,6 +8,7 @@ import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
@@ -22,12 +23,12 @@ public interface Condition extends TypeSerializer<Condition> {
    *
    * @param event the event to test.
    * @param employee the employee to test.
-   * @param job the job to test.
+   * @param work the work to test.
    * @param mission the mission to test.
    *
    * @return {@code true} if the event passes the condition.
    */
-  boolean condition(@NotNull Event event, @NotNull Employee employee, @NotNull Job job, @NotNull Mission mission);
+  boolean condition(@NotNull Event event, @NotNull Employee employee, @NotNull Work work, @NotNull Mission mission);
 
   /**
    * obtains the id.

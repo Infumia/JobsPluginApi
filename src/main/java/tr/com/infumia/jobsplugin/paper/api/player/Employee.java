@@ -6,12 +6,24 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * an interface to determine player jobs.
  */
 public interface Employee {
+
+  /**
+   * runs all the works.
+   *
+   * @param event the event to run.
+   */
+  default void accept(@NotNull final Event event) {
+    for (final var work : this.getWorks()) {
+      work.accept(event, this);
+    }
+  }
 
   /**
    * adds the work.

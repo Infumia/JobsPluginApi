@@ -8,8 +8,8 @@ import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 
 /**
@@ -30,10 +30,10 @@ public interface Reward extends TypeSerializer<Reward> {
    *
    * @param event the event to give.
    * @param employee the employee to give.
-   * @param job the job to give.
+   * @param work the work to give.
    * @param mission the mission to give.
    */
-  void reward(@NotNull Event event, @NotNull Employee employee, @NotNull Job job, @NotNull Mission mission);
+  void reward(@NotNull Event event, @NotNull Employee employee, @NotNull Work work, @NotNull Mission mission);
 
   /**
    * an interface to determine serializers for {@link Reward}.
