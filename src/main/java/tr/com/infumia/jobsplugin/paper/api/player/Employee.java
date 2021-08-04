@@ -40,6 +40,28 @@ public interface Employee {
   }
 
   /**
+   * saves the employee.
+   *
+   * @param employee the employee to save.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  static CompletableFuture<Void> save(@NotNull final Employee employee) {
+    return Employees.save(employee);
+  }
+
+  /**
+   * saves all the employees.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  static CompletableFuture<Void> saveAll() {
+    return Employees.saveAll();
+  }
+
+  /**
    * runs all the works.
    *
    * @param event the event to run.
@@ -109,4 +131,14 @@ public interface Employee {
    * @param id the id to remove.
    */
   void removeWork(@NotNull String id);
+
+  /**
+   * saves the employee.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  default CompletableFuture<Void> save() {
+    return Employee.save(this);
+  }
 }

@@ -1,5 +1,7 @@
 package tr.com.infumia.jobsplugin.paper.api.player;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -22,6 +24,11 @@ public class Employees {
   private final Map<UUID, Employee> EMPLOYEES = new ConcurrentHashMap<>();
 
   /**
+   * the employees.
+   */
+  private final Collection<Employee> EMPLOYEES_SET = new HashSet<>();
+
+  /**
    * the employee creator.
    */
   @Nullable
@@ -40,6 +47,7 @@ public class Employees {
       .orElseGet(() -> {
         final var employee = Employees.createEmployee(uniqueId);
         Employees.EMPLOYEES.put(uniqueId, employee);
+        Employees.EMPLOYEES_SET.add(employee);
         return employee;
       });
   }
@@ -56,10 +64,38 @@ public class Employees {
     return Optional.ofNullable(Employees.EMPLOYEES.get(uniqueId))
       .map(CompletableFuture::completedFuture)
       .orElseGet(() ->
-        Employees.provideEmployee(uniqueId).whenComplete((employee, throwable) ->
-          Employees.EMPLOYEES.put(
-            uniqueId,
-            Objects.requireNonNullElseGet(employee, () -> Employees.createEmployee(uniqueId)))));
+        Employees.provideEmployee(uniqueId).whenComplete((employee, throwable) -> {
+          final var newly = Objects.requireNonNullElseGet(employee, () -> Employees.createEmployee(uniqueId));
+          Employees.EMPLOYEES.put(uniqueId, newly);
+          Employees.EMPLOYEES_SET.add(employee);
+        }));
+  }
+
+  /**
+   * saves the employee.
+   *
+   * @param employee the employee to save.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  static CompletableFuture<Void> save(@NotNull final Employee employee) {
+    final var uniqueId = employee.getPlayerUniqueId();
+    if (!Employees.EMPLOYEES.containsKey(uniqueId)) {
+      Employees.EMPLOYEES.put(uniqueId, employee);
+      Employees.EMPLOYEES_SET.add(employee);
+    }
+    return Employees.supplyEmployee(employee);
+  }
+
+  /**
+   * saves all the employees.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  static CompletableFuture<Void> saveAll() {
+    return Employees.supplyAllEmployees(Employees.EMPLOYEES_SET);
   }
 
   /**
@@ -107,5 +143,29 @@ public class Employees {
   @NotNull
   private CompletableFuture<@Nullable Employee> provideEmployee(@NotNull final UUID uniqueId) {
     return CompletableFuture.supplyAsync(() -> Employees.getEmployeeCreator().provideEmployee(uniqueId));
+  }
+
+  /**
+   * supplies all the employees.
+   *
+   * @param employees the employees to supply.
+   *
+   * @return completable future.
+   */
+  @NotNull
+  private CompletableFuture<Void> supplyAllEmployees(@NotNull final Collection<Employee> employees) {
+    return CompletableFuture.runAsync(() -> Employees.getEmployeeCreator().supplyAllEmployee(employees));
+  }
+
+  /**
+   * supplies the employee.
+   *
+   * @param employee the employee to supply.
+   *
+   * @return completed future..
+   */
+  @NotNull
+  private CompletableFuture<Void> supplyEmployee(@NotNull final Employee employee) {
+    return CompletableFuture.runAsync(() -> Employees.getEmployeeCreator().supplyEmployee(employee));
   }
 }
