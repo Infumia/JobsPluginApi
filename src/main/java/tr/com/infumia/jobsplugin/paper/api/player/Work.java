@@ -31,7 +31,7 @@ public interface Work {
    * @return work.
    */
   @NotNull
-  static Work   get(@NotNull final Job job) {
+  static Work get(@NotNull final Job job) {
     return Works.get(job);
   }
 

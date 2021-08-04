@@ -6,7 +6,6 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.player.Work;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 
 /**
  * a class that represents employee quit job events which fire when a player quits from a job.
