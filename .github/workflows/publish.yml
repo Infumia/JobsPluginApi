@@ -46,7 +46,7 @@ jobs:
         with:
           tag_name: '${{ steps.bump-semver.outputs.new_version }}'
           name: '${{ steps.bump-semver.outputs.new_version }}'
-          body: '[Changelog](https://github.com/Infumia/ClaimPluginApi/compare/${{ steps.version.outputs.release }}...${{ steps.bump-semver.outputs.new_version }})'
+          body: '[Changelog](https://github.com/Infumia/JobsPluginApi/compare/${{ steps.version.outputs.release }}...${{ steps.bump-semver.outputs.new_version }})'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
