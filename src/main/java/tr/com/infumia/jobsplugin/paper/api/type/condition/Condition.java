@@ -10,7 +10,6 @@ import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 
 /**
