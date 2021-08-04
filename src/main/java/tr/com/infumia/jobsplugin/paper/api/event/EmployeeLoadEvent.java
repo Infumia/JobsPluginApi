@@ -3,7 +3,7 @@ package tr.com.infumia.jobsplugin.paper.api.event;
 import lombok.Getter;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
-import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 
 /**
  * a class that represents employee load events which fire when a player joins to the server and loads employee date.

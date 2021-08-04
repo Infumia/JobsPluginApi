@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.type.job;
+package tr.com.infumia.jobsplugin.paper.api.job;
 
 import java.util.Map;
 import java.util.Optional;

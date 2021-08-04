@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.type;
+package tr.com.infumia.jobsplugin.paper.api;
 
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;

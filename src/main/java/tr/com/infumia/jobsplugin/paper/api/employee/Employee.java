@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.player;
+package tr.com.infumia.jobsplugin.paper.api.employee;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -12,7 +12,8 @@ import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.work.Work;
 
 /**
  * an interface to determine player jobs.
@@ -116,7 +117,7 @@ public interface Employee extends Callable {
    */
   default boolean addWorkWithEvent(@NotNull final Work work) {
     return Callable.callEvent(new EmployeeJoinJobEvent(this, work), event ->
-      this.addWork(work));
+      event.getEmployee().addWork(event.getWork()));
   }
 
   /**
@@ -257,7 +258,7 @@ public interface Employee extends Callable {
    */
   default boolean removeWorkWithEvent(@NotNull final Work work) {
     return Callable.callEvent(new EmployeeQuitJobEvent(this, work), event ->
-      this.removeWork(work));
+      event.getEmployee().removeWork(event.getWork()));
   }
 
   /**

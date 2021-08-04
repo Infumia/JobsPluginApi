@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.player;
+package tr.com.infumia.jobsplugin.paper.api.employee;
 
 import java.util.Collection;
 import java.util.HashSet;

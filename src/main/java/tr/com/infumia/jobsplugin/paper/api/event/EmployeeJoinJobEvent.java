@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
-import tr.com.infumia.jobsplugin.paper.api.player.Employee;
-import tr.com.infumia.jobsplugin.paper.api.player.Work;
+import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
+import tr.com.infumia.jobsplugin.paper.api.work.Work;
 
 /**
  * a class that represents employee join job events which fire when a player joins to a job.

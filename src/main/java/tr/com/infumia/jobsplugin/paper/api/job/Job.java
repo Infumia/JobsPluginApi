@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.type.job;
+package tr.com.infumia.jobsplugin.paper.api.job;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -9,10 +9,10 @@ import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
 import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
-import tr.com.infumia.jobsplugin.paper.api.player.Employee;
-import tr.com.infumia.jobsplugin.paper.api.player.Work;
-import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
-import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
+import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
+import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.work.Work;
 
 /**
  * an interface to determine jobs.
