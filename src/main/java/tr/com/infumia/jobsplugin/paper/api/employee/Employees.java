@@ -67,7 +67,7 @@ public class Employees {
         Employees.provideEmployee(uniqueId).whenComplete((employee, throwable) -> {
           final var newly = Objects.requireNonNullElseGet(employee, () -> Employees.createEmployee(uniqueId));
           Employees.EMPLOYEES.put(uniqueId, newly);
-          Employees.EMPLOYEES_SET.add(employee);
+          Employees.EMPLOYEES_SET.add(newly);
         }));
   }
 
