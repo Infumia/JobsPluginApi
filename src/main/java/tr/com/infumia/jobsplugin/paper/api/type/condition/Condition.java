@@ -7,10 +7,10 @@ import org.jetbrains.annotations.Nullable;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
-import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
-import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
+import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 
 /**
  * an interface to determine conditions.
