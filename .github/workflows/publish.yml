@@ -27,7 +27,7 @@ jobs:
         id: version
         with:
           owner: Infumia
-          repo: ClaimPluginApi
+          repo: JobsPluginApi
 
       - uses: actions-ecosystem/action-bump-semver@v1
         id: bump-semver
