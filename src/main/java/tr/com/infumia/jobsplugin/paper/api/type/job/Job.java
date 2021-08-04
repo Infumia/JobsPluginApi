@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
+import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
@@ -16,7 +17,7 @@ import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 /**
  * an interface to determine jobs.
  */
-public interface Job extends TypeSerializer<Job> {
+public interface Job extends TypeSerializer<Job>, IdNameDescription {
 
   /**
    * gets the job via id.
@@ -73,22 +74,6 @@ public interface Job extends TypeSerializer<Job> {
   void addMission(@NotNull Mission mission);
 
   /**
-   * obtains the description.
-   *
-   * @return description.
-   */
-  @NotNull
-  String getDescription();
-
-  /**
-   * obtains the id.
-   *
-   * @return id.
-   */
-  @NotNull
-  String getId();
-
-  /**
    * gets the mission.
    *
    * @param id the id to get.
@@ -105,14 +90,6 @@ public interface Job extends TypeSerializer<Job> {
    */
   @NotNull
   Collection<Mission> getMissions();
-
-  /**
-   * obtains the name.
-   *
-   * @return name.
-   */
-  @NotNull
-  String getName();
 
   /**
    * removes the mission.

@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
+import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
 import tr.com.infumia.jobsplugin.paper.api.player.Work;
 import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
@@ -17,7 +18,7 @@ import tr.com.infumia.jobsplugin.paper.api.type.reward.Reward;
 /**
  * an interface to determine missions.
  */
-public interface Mission extends TypeSerializer<Mission> {
+public interface Mission extends TypeSerializer<Mission>, IdNameDescription {
 
   /**
    * runs all the conditions and rewards.
@@ -68,30 +69,6 @@ public interface Mission extends TypeSerializer<Mission> {
    */
   @NotNull
   Collection<Condition> getConditions();
-
-  /**
-   * obtains the description.
-   *
-   * @return description.
-   */
-  @NotNull
-  String getDescription();
-
-  /**
-   * obtains the id.
-   *
-   * @return id.
-   */
-  @NotNull
-  String getId();
-
-  /**
-   * obtains the name.
-   *
-   * @return name.
-   */
-  @NotNull
-  String getName();
 
   /**
    * gets the reward.
