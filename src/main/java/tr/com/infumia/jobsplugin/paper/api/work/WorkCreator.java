@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.player;
+package tr.com.infumia.jobsplugin.paper.api.work;
 
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
-import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 
 /**
  * an abstract class that represents employee events.

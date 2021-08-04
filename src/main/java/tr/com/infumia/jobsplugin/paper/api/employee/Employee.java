@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.player;
+package tr.com.infumia.jobsplugin.paper.api.employee;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,6 +13,7 @@ import tr.com.infumia.jobsplugin.paper.api.Callable;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.work.Work;
 
 /**
  * an interface to determine player jobs.

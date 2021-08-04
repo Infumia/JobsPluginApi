@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.player;
+package tr.com.infumia.jobsplugin.paper.api.work;
 
 import java.util.Objects;
 import lombok.experimental.UtilityClass;
