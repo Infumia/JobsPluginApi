@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
+import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.jobsplugin.paper.api.condition.Condition;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
@@ -103,4 +104,11 @@ public interface Mission {
    * @param id the id to remove.
    */
   void removeReward(@NotNull String id);
+
+  /**
+   * an interface to determine serializers for {@link Mission}.
+   */
+  interface Serializer extends ObjectSerializer<Mission> {
+
+  }
 }

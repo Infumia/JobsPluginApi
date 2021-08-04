@@ -2,6 +2,7 @@ package tr.com.infumia.jobsplugin.paper.api.condition;
 
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
+import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
@@ -14,9 +15,10 @@ public interface Condition {
   /**
    * tests the condition.
    *
-   * @param employee the employee to test.
-   * @param mission the mission to test.
    * @param event the event to test.
+   * @param employee the employee to test.
+   * @param job the job to test.
+   * @param mission the mission to test.
    *
    * @return {@code true} if the event passes the condition.
    */
@@ -29,4 +31,11 @@ public interface Condition {
    */
   @NotNull
   String getId();
+
+  /**
+   * an interface to determine serializers for {@link Condition}.
+   */
+  interface Serializer extends ObjectSerializer<Condition> {
+
+  }
 }
