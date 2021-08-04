@@ -1,5 +1,6 @@
 package tr.com.infumia.jobsplugin.paper.api.player;
 
+import java.util.Optional;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
@@ -8,6 +9,31 @@ import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
  * an interface to determine works.
  */
 public interface Work {
+
+  /**
+   * creates a new instance of work.
+   *
+   * @param id the id to create.
+   *
+   * @return work.
+   */
+  @NotNull
+  static Optional<Work> get(@NotNull final String id) {
+    return Job.get(id)
+      .map(Work::get);
+  }
+
+  /**
+   * creates a new instance of work.
+   *
+   * @param job the job to create.
+   *
+   * @return work.
+   */
+  @NotNull
+  static Work   get(@NotNull final Job job) {
+    return Works.get(job);
+  }
 
   /**
    * runs the job.

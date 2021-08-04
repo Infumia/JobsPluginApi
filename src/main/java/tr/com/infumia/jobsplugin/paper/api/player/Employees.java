@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * a utility class that contains methods for {@link Employee}.
+ * an utility class that contains methods for {@link Employee}.
  */
 @UtilityClass
 public class Employees {

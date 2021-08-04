@@ -19,6 +19,40 @@ import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 public interface Job extends TypeSerializer<Job> {
 
   /**
+   * gets the job via id.
+   *
+   * @param id the id to get.
+   *
+   * @return job.
+   */
+  @NotNull
+  static Optional<Job> get(@NotNull final String id) {
+    return Jobs.get(id);
+  }
+
+  /**
+   * gets the job via id.
+   *
+   * @param id the id to get.
+   *
+   * @return job.
+   */
+  @NotNull
+  static Job getOrThrow(@NotNull final String id) {
+    return Jobs.get(id).orElseThrow(() ->
+      new IllegalStateException(String.format("Job called %s not found!", id)));
+  }
+
+  /**
+   * registers the job.
+   *
+   * @param job the job to register.
+   */
+  static void register(@NotNull final Job job) {
+    Jobs.register(job);
+  }
+
+  /**
    * runs all the missions.
    *
    * @param event the event to run.

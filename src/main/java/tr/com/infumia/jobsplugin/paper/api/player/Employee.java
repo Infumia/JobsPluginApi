@@ -4,16 +4,37 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
+import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
+import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
+import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
 
 /**
  * an interface to determine player jobs.
  */
 public interface Employee {
+
+  /**
+   * calls the given event then, if it's succeed runs the consumer.
+   *
+   * @param event the event to call.
+   * @param consumer the consumer to call.
+   * @param <E> type of the event.
+   *
+   * @return {@code true} if the event called successfully.
+   */
+  static <E extends Event> boolean callEvent(@NotNull final E event, @NotNull final Consumer<E> consumer) {
+    if (event.callEvent()) {
+      consumer.accept(event);
+      return true;
+    }
+    return false;
+  }
 
   /**
    * gets employee or creates it.
@@ -80,6 +101,42 @@ public interface Employee {
   void addWork(@NotNull Work work);
 
   /**
+   * adds the work.
+   *
+   * @param id the id to add.
+   *
+   * @return {@code true} if player successfully join to the work.
+   */
+  default boolean addWorkWithEvent(@NotNull final String id) {
+    return Job.get(id)
+      .map(this::addWorkWithEvent)
+      .orElse(false);
+  }
+
+  /**
+   * adds the work.
+   *
+   * @param job the job to add.
+   *
+   * @return {@code true} if player successfully join to the work.
+   */
+  default boolean addWorkWithEvent(@NotNull final Job job) {
+    return this.addWorkWithEvent(Work.get(job));
+  }
+
+  /**
+   * adds the work.
+   *
+   * @param work the work to add.
+   *
+   * @return {@code true} if player successfully join to the work.
+   */
+  default boolean addWorkWithEvent(@NotNull final Work work) {
+    return Employee.callEvent(new EmployeeJoinJobEvent(this, work), event ->
+      this.addWork(work));
+  }
+
+  /**
    * obtains the offline player.
    *
    * @return player as offline player.
@@ -121,12 +178,12 @@ public interface Employee {
   /**
    * gets the work.
    *
-   * @param id the id to get.
+   * @param job the job to get.
    *
    * @return work.
    */
   @NotNull
-  Optional<Work> getWork(@NotNull String id);
+  Optional<Work> getWork(@NotNull Job job);
 
   /**
    * obtains the works.
@@ -139,9 +196,47 @@ public interface Employee {
   /**
    * removes the work.
    *
-   * @param id the id to remove.
+   * @param work the work to remove.
    */
-  void removeWork(@NotNull String id);
+  void removeWork(@NotNull Work work);
+
+  /**
+   * removes the work.
+   *
+   * @param id the id to remove.
+   *
+   * @return {@code true} if player successfully quit from the work.
+   */
+  default boolean removeWorkWithEvent(@NotNull final String id) {
+    return Job.get(id)
+      .map(this::removeWorkWithEvent)
+      .orElse(false);
+  }
+
+  /**
+   * removes the work.
+   *
+   * @param job the job to remove.
+   *
+   * @return {@code true} if player successfully quit from the work.
+   */
+  default boolean removeWorkWithEvent(@NotNull final Job job) {
+    return this.getWork(job)
+      .map(this::removeWorkWithEvent)
+      .orElse(false);
+  }
+
+  /**
+   * removes the work.
+   *
+   * @param work the work to remove.
+   *
+   * @return {@code true} if player successfully quit from the work.
+   */
+  default boolean removeWorkWithEvent(@NotNull final Work work) {
+    return Employee.callEvent(new EmployeeQuitJobEvent(this, work), event ->
+      this.removeWork(work));
+  }
 
   /**
    * saves the employee.
