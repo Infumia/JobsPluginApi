@@ -80,9 +80,8 @@ public class Employees {
    */
   @NotNull
   static CompletableFuture<Void> save(@NotNull final Employee employee) {
-    final var uniqueId = employee.getPlayerUniqueId();
-    if (!Employees.EMPLOYEES.containsKey(uniqueId)) {
-      Employees.EMPLOYEES.put(uniqueId, employee);
+    if (!Employees.EMPLOYEES_SET.contains(employee)) {
+      Employees.EMPLOYEES.put(employee.getPlayerUniqueId(), employee);
       Employees.EMPLOYEES_SET.add(employee);
     }
     return Employees.supplyEmployee(employee);

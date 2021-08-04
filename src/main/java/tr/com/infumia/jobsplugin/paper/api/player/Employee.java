@@ -194,6 +194,20 @@ public interface Employee extends Callable {
   Optional<Work> getWork(@NotNull Job job);
 
   /**
+   * obtains the work limit.
+   *
+   * @return work limit.
+   */
+  long getWorkLimit();
+
+  /**
+   * sets the work limit.
+   *
+   * @param limit the limit to set.
+   */
+  void setWorkLimit(long limit);
+
+  /**
    * obtains the works.
    *
    * @return works.
