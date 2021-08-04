@@ -7,6 +7,8 @@ import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 
 /**
  * a class that represents employee close events which fire when a player quits from the server.
+ * <p>
+ * this event is async.
  */
 public final class EmployeeCloseEvent extends EmployeeEvent {
 
@@ -22,7 +24,7 @@ public final class EmployeeCloseEvent extends EmployeeEvent {
    * @param employee the employee.
    */
   public EmployeeCloseEvent(@NotNull final Employee employee) {
-    super(employee);
+    super(true, employee);
   }
 
   @NotNull

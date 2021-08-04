@@ -1,6 +1,5 @@
 package tr.com.infumia.jobsplugin.paper.api.employee;
 
-import java.io.Closeable;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
@@ -21,16 +20,19 @@ import tr.com.infumia.jobsplugin.paper.api.work.Work;
 /**
  * an interface to determine player jobs.
  */
-public interface Employee extends Callable, Closeable {
+public interface Employee extends Callable {
 
   /**
    * closes the employee, runs when the player quits from the server.
    *
    * @param employee the employee to close.
+   *
+   * @return completed future.
    */
-  static void close(@NotNull final Employee employee) {
-    Callable.callEvent(new EmployeeCloseEvent(employee), event ->
-      Employees.close(event.getEmployee()));
+  @NotNull
+  static CompletableFuture<Void> close(@NotNull final Employee employee) {
+    return Employees.close(employee).whenCompleteAsync((unused, throwable) ->
+      new EmployeeCloseEvent(employee).callEvent());
   }
 
   /**
@@ -137,9 +139,14 @@ public interface Employee extends Callable, Closeable {
       event.getEmployee().addWork(event.getWork()));
   }
 
-  @Override
-  default void close() {
-    Employee.close(this);
+  /**
+   * closes the employee, runs when the player quits from the server.
+   *
+   * @return completed future.
+   */
+  @NotNull
+  default CompletableFuture<Void> close() {
+    return Employee.close(this);
   }
 
   /**
