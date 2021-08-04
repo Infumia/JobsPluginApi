@@ -44,6 +44,14 @@ public interface Mission {
   Collection<Reward> getConditions();
 
   /**
+   * obtains the id.
+   *
+   * @return id.
+   */
+  @NotNull
+  String getId();
+
+  /**
    * gets the reward.
    *
    * @param id the id to get.
