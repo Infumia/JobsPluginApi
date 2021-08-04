@@ -17,7 +17,7 @@ import tr.com.infumia.jobsplugin.paper.api.type.reward.Reward;
 /**
  * an interface to determine missions.
  */
-public interface Mission extends TypeSerializer {
+public interface Mission extends TypeSerializer<Mission> {
 
   /**
    * runs all the conditions and rewards.

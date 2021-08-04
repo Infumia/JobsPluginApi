@@ -15,7 +15,7 @@ import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 /**
  * an interface to determine jobs.
  */
-public interface Job extends TypeSerializer {
+public interface Job extends TypeSerializer<Job> {
 
   /**
    * runs all the missions.

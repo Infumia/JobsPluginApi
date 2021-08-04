@@ -15,7 +15,7 @@ import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 /**
  * an interface to determine conditions.
  */
-public interface Condition extends TypeSerializer {
+public interface Condition extends TypeSerializer<Condition> {
 
   /**
    * tests the condition.
