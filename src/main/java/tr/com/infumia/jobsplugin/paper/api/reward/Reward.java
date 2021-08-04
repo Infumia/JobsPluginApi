@@ -1,6 +1,9 @@
 package tr.com.infumia.jobsplugin.paper.api.reward;
 
 import java.util.Optional;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -49,5 +52,34 @@ public interface Reward extends TypeSerializer<Reward>, IdNameDescription {
     default boolean supports(@NotNull final Class<?> cls) {
       return Reward.class.isAssignableFrom(cls);
     }
+  }
+
+  /**
+   * an abstract implementation for {@link Reward}.
+   */
+  @Getter
+  @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+  abstract class Base implements Reward {
+
+    /**
+     * the description.
+     */
+    @NotNull
+    @Getter
+    private final String description;
+
+    /**
+     * the id.
+     */
+    @NotNull
+    @Getter
+    private final String id;
+
+    /**
+     * the name.
+     */
+    @NotNull
+    @Getter
+    private final String name;
   }
 }

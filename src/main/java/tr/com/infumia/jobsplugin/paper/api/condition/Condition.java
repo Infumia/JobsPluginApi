@@ -1,6 +1,9 @@
 package tr.com.infumia.jobsplugin.paper.api.condition;
 
 import java.util.Optional;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,5 +55,34 @@ public interface Condition extends TypeSerializer<Condition>, IdNameDescription 
     default boolean supports(@NotNull final Class<?> cls) {
       return Condition.class.isAssignableFrom(cls);
     }
+  }
+
+  /**
+   * an abstract implementation for {@link Condition}.
+   */
+  @Getter
+  @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+  abstract class Base implements Condition {
+
+    /**
+     * the description.
+     */
+    @NotNull
+    @Getter
+    private final String description;
+
+    /**
+     * the id.
+     */
+    @NotNull
+    @Getter
+    private final String id;
+
+    /**
+     * the name.
+     */
+    @NotNull
+    @Getter
+    private final String name;
   }
 }

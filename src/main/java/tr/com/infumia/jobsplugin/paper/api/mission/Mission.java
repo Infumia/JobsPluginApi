@@ -135,7 +135,7 @@ public interface Mission extends TypeSerializer<Mission>, IdNameDescription {
    */
   @Getter
   @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-  abstract class Impl implements Mission {
+  abstract class Base implements Mission {
 
     /**
      * the conditions.
