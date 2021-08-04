@@ -35,6 +35,16 @@ public class Employees {
   private EmployeeCreator employeeCreator;
 
   /**
+   * closes the employee, runs when the player quits from the server.
+   *
+   * @param employee the employee to close.
+   */
+  void close(@NotNull final Employee employee) {
+    Employees.EMPLOYEES.remove(employee.getPlayerUniqueId());
+    Employees.EMPLOYEES_SET.remove(employee);
+  }
+
+  /**
    * gets employee or creates it.
    *
    * @param uniqueId the unique id to get.

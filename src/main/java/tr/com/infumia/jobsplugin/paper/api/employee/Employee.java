@@ -1,5 +1,6 @@
 package tr.com.infumia.jobsplugin.paper.api.employee;
 
+import java.io.Closeable;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,7 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
+import tr.com.infumia.jobsplugin.paper.api.event.EmployeeCloseEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
+import tr.com.infumia.jobsplugin.paper.api.event.EmployeeLoadEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.job.Job;
 import tr.com.infumia.jobsplugin.paper.api.work.Work;
@@ -18,7 +21,17 @@ import tr.com.infumia.jobsplugin.paper.api.work.Work;
 /**
  * an interface to determine player jobs.
  */
-public interface Employee extends Callable {
+public interface Employee extends Callable, Closeable {
+
+  /**
+   * closes the employee, runs when the player quits from the server.
+   *
+   * @param employee the employee to close.
+   */
+  static void close(@NotNull final Employee employee) {
+    Callable.callEvent(new EmployeeCloseEvent(employee), event ->
+      Employees.close(event.getEmployee()));
+  }
 
   /**
    * gets employee or creates it.
@@ -41,7 +54,11 @@ public interface Employee extends Callable {
    */
   @NotNull
   static CompletableFuture<@NotNull Employee> load(@NotNull final UUID uniqueId) {
-    return Employees.load(uniqueId);
+    return Employees.load(uniqueId).thenApply(employee -> {
+      final var employeeLoadEvent = new EmployeeLoadEvent(employee);
+      employeeLoadEvent.callEvent();
+      return employeeLoadEvent.getEmployee();
+    });
   }
 
   /**
@@ -118,6 +135,11 @@ public interface Employee extends Callable {
   default boolean addWorkWithEvent(@NotNull final Work work) {
     return Callable.callEvent(new EmployeeJoinJobEvent(this, work), event ->
       event.getEmployee().addWork(event.getWork()));
+  }
+
+  @Override
+  default void close() {
+    Employee.close(this);
   }
 
   /**
