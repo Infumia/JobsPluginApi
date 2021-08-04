@@ -124,7 +124,7 @@ public interface Employee extends Callable {
    * @return {@code true} if player successfully join to the work.
    */
   default boolean addWorkWithEvent(@NotNull final Job job) {
-    return this.addWorkWithEvent(Work.get(job));
+    return this.addWorkWithEvent(Work.of(job));
   }
 
   /**
