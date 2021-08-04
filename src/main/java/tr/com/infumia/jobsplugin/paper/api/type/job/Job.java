@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.job;
+package tr.com.infumia.jobsplugin.paper.api.type.job;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -8,13 +8,14 @@ import org.jetbrains.annotations.Nullable;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
 
 /**
  * an interface to determine jobs.
  */
-public interface Job {
+public interface Job extends TypeSerializer {
 
   /**
    * runs all the missions.
@@ -67,13 +68,6 @@ public interface Job {
    * @param id the id to remove.
    */
   void removeMission(@NotNull String id);
-
-  /**
-   * serializes condition.
-   *
-   * @param data the data to serialize.
-   */
-  void serialize(@NotNull TransformedData data);
 
   /**
    * an interface to determine serializers for {@link Job}.

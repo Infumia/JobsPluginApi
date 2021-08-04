@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.condition;
+package tr.com.infumia.jobsplugin.paper.api.type.condition;
 
 import java.util.Optional;
 import org.bukkit.event.Event;
@@ -7,14 +7,15 @@ import org.jetbrains.annotations.Nullable;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
-import tr.com.infumia.jobsplugin.paper.api.job.Job;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.type.job.Job;
+import tr.com.infumia.jobsplugin.paper.api.type.mission.Mission;
 import tr.com.infumia.jobsplugin.paper.api.player.Employee;
+import tr.com.infumia.jobsplugin.paper.api.type.TypeSerializer;
 
 /**
  * an interface to determine conditions.
  */
-public interface Condition {
+public interface Condition extends TypeSerializer {
 
   /**
    * tests the condition.
@@ -35,13 +36,6 @@ public interface Condition {
    */
   @NotNull
   String getId();
-
-  /**
-   * serializes condition.
-   *
-   * @param data the data to serialize.
-   */
-  void serialize(@NotNull TransformedData data);
 
   /**
    * an interface to determine serializers for {@link Condition}.
