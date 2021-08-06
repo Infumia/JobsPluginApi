@@ -10,60 +10,60 @@ sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
 tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
+    options.encoding = "UTF-8"
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "io.github.parentpom:ppom:3.4.51"
-	}
+    imports {
+        mavenBom "io.github.parentpom:ppom:3.4.51"
+    }
 }
 
 repositories {
-	mavenCentral()
-	maven {
-		url "https://jitpack.io/"
-	}
-	maven {
-		url "https://papermc.io/repo/repository/maven-public/"
-	}
-	mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://jitpack.io/"
+    }
+    maven {
+        url "https://papermc.io/repo/repository/maven-public/"
+    }
+    mavenLocal()
 }
 
 javadoc {
-	options.tags = ["todo"]
+    options.tags = ["todo"]
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier "sources"
-	from sourceSets.main.allSource
+    classifier "sources"
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-	classifier "javadoc"
-	from javadoc.destinationDir
+    classifier "javadoc"
+    from javadoc.destinationDir
 }
 
 dependencies {
-	compileOnly "org.projectlombok:lombok"
-	compileOnly "org.jetbrains:annotations"
-	compileOnly "com.github.Infumia.InfumiaLib:InfumiaCommon:2.3.7"
+    compileOnly "org.projectlombok:lombok"
+    compileOnly "org.jetbrains:annotations"
+    compileOnly "com.github.Infumia.InfumiaLib:InfumiaCommon:2.3.7"
     compileOnly "com.github.Infumia.InfumiaLib:InfumiaPaper:2.3.7"
-	compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
+    compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
 
-	annotationProcessor "org.projectlombok:lombok"
-	annotationProcessor "org.jetbrains:annotations"
+    annotationProcessor "org.projectlombok:lombok"
+    annotationProcessor "org.jetbrains:annotations"
 }
 
 publishing {
-	publications {
-		shadow(MavenPublication) { publication ->
-			from components.java
-			artifact tasks.sourcesJar
-			artifact tasks.javadocJar
-			groupId project.group
-			artifactId project.name
-			version project.version
-		}
-	}
+    publications {
+        shadow(MavenPublication) { publication ->
+            from components.java
+            artifact tasks.sourcesJar
+            artifact tasks.javadocJar
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+    }
 }
