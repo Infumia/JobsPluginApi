@@ -40,7 +40,7 @@ public interface Work extends Callable {
    */
   @NotNull
   static Work of(@NotNull final Job job) {
-    return new Impl(job);
+    return Work.of(job, 0L, 0L);
   }
 
   /**
@@ -156,14 +156,5 @@ public interface Work extends Callable {
      */
     @Setter
     private long level;
-
-    /**
-     * ctor.
-     *
-     * @param job the job.
-     */
-    private Impl(@NotNull final Job job) {
-      this.job = job;
-    }
   }
 }
