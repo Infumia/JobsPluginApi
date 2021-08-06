@@ -6,8 +6,8 @@ plugins {
 
 group "tr.com.infumia"
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
