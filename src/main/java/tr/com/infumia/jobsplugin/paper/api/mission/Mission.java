@@ -26,6 +26,27 @@ import tr.com.infumia.jobsplugin.paper.api.reward.Reward;
 public interface Mission extends TypeSerializer<Mission>, IdNameDescription {
 
   /**
+   * gets the mission by id.
+   *
+   * @param id the id to get.
+   *
+   * @return mission.
+   */
+  @NotNull
+  static Optional<Mission> get(@NotNull final String id) {
+    return Missions.get(id);
+  }
+
+  /**
+   * registers the given mission.
+   *
+   * @param mission the mission to register.
+   */
+  static void register(@NotNull final Mission mission) {
+    Missions.register(mission);
+  }
+
+  /**
    * runs all the conditions and rewards.
    *
    * @param event the event to run.

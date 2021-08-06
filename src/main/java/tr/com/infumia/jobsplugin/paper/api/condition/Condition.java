@@ -22,6 +22,27 @@ import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 public interface Condition extends TypeSerializer<Condition>, IdNameDescription {
 
   /**
+   * gets the condition by id.
+   *
+   * @param id the id to get.
+   *
+   * @return condition.
+   */
+  @NotNull
+  static Optional<Condition> get(@NotNull final String id) {
+    return Conditions.get(id);
+  }
+
+  /**
+   * registers the given condition.
+   *
+   * @param condition the condition to register.
+   */
+  static void register(@NotNull final Condition condition) {
+    Conditions.register(condition);
+  }
+
+  /**
    * tests the condition.
    *
    * @param event the event to test.

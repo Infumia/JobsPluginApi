@@ -22,6 +22,27 @@ import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 public interface Reward extends TypeSerializer<Reward>, IdNameDescription {
 
   /**
+   * gets the reward by id.
+   *
+   * @param id the id to get.
+   *
+   * @return reward.
+   */
+  @NotNull
+  static Optional<Reward> get(@NotNull final String id) {
+    return Rewards.get(id);
+  }
+
+  /**
+   * registers the given reward.
+   *
+   * @param reward the reward to register.
+   */
+  static void register(@NotNull final Reward reward) {
+    Rewards.register(reward);
+  }
+
+  /**
    * gives the reward to the player.
    *
    * @param event the event to give.
