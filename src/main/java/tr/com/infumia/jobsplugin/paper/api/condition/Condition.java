@@ -68,21 +68,18 @@ public interface Condition extends TypeSerializer<Condition>, IdNameDescription 
      * the description.
      */
     @NotNull
-    @Getter
     private final String description;
 
     /**
      * the id.
      */
     @NotNull
-    @Getter
     private final String id;
 
     /**
      * the name.
      */
     @NotNull
-    @Getter
     private final String name;
   }
 }
