@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.job;
+package tr.com.infumia.jobsplugin.paper.api;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -10,19 +10,23 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tr.com.infumia.infumialib.registry.StringRegistry;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
-import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
-import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 import tr.com.infumia.jobsplugin.paper.api.employee.Work;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * an interface to determine jobs.
  */
 public interface Job extends TypeSerializer<Job>, IdNameDescription {
+
+  /**
+   * the instance.
+   */
+  StringRegistry<Job> REGISTRY = new StringRegistry<>() {
+  };
 
   /**
    * gets the job via id.
@@ -33,7 +37,7 @@ public interface Job extends TypeSerializer<Job>, IdNameDescription {
    */
   @NotNull
   static Optional<Job> get(@NotNull final String id) {
-    return Jobs.get(id);
+    return Job.REGISTRY.get(id);
   }
 
   /**
@@ -45,7 +49,7 @@ public interface Job extends TypeSerializer<Job>, IdNameDescription {
    */
   @NotNull
   static Job getOrThrow(@NotNull final String id) {
-    return Jobs.get(id).orElseThrow(() ->
+    return Job.get(id).orElseThrow(() ->
       new IllegalStateException(String.format("Job called %s not found!", id)));
   }
 
@@ -55,7 +59,7 @@ public interface Job extends TypeSerializer<Job>, IdNameDescription {
    * @param job the job to register.
    */
   static void register(@NotNull final Job job) {
-    Jobs.register(job);
+    Job.REGISTRY.register(job);
   }
 
   /**

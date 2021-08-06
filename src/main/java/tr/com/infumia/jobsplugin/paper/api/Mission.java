@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.mission;
+package tr.com.infumia.jobsplugin.paper.api;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -10,20 +10,23 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tr.com.infumia.infumialib.registry.StringRegistry;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
-import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
-import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
-import tr.com.infumia.jobsplugin.paper.api.condition.Condition;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 import tr.com.infumia.jobsplugin.paper.api.employee.Work;
-import tr.com.infumia.jobsplugin.paper.api.reward.Reward;
 
 /**
  * an interface to determine missions.
  */
 public interface Mission extends TypeSerializer<Mission>, IdNameDescription {
+
+  /**
+   * the instance.
+   */
+  StringRegistry<Mission> REGISTRY = new StringRegistry<>() {
+  };
 
   /**
    * gets the mission by id.
@@ -34,7 +37,20 @@ public interface Mission extends TypeSerializer<Mission>, IdNameDescription {
    */
   @NotNull
   static Optional<Mission> get(@NotNull final String id) {
-    return Missions.get(id);
+    return Mission.REGISTRY.get(id);
+  }
+
+  /**
+   * gets the mission via id.
+   *
+   * @param id the id to get.
+   *
+   * @return mission.
+   */
+  @NotNull
+  static Mission getOrThrow(@NotNull final String id) {
+    return Mission.get(id).orElseThrow(() ->
+      new IllegalStateException(String.format("Mission called %s not found!", id)));
   }
 
   /**
@@ -43,7 +59,7 @@ public interface Mission extends TypeSerializer<Mission>, IdNameDescription {
    * @param mission the mission to register.
    */
   static void register(@NotNull final Mission mission) {
-    Missions.register(mission);
+    Mission.REGISTRY.register(mission);
   }
 
   /**

@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.condition;
+package tr.com.infumia.jobsplugin.paper.api;
 
 import java.util.Optional;
 import lombok.AccessLevel;
@@ -7,14 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tr.com.infumia.infumialib.registry.StringRegistry;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
-import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
-import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 import tr.com.infumia.jobsplugin.paper.api.employee.Work;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * an interface to determine conditions.
@@ -22,7 +20,13 @@ import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 public interface Condition extends TypeSerializer<Condition>, IdNameDescription {
 
   /**
-   * gets the condition by id.
+   * the instance.
+   */
+  StringRegistry<Condition> REGISTRY = new StringRegistry<>() {
+  };
+
+  /**
+   * gets the condition via id.
    *
    * @param id the id to get.
    *
@@ -30,16 +34,29 @@ public interface Condition extends TypeSerializer<Condition>, IdNameDescription 
    */
   @NotNull
   static Optional<Condition> get(@NotNull final String id) {
-    return Conditions.get(id);
+    return Condition.REGISTRY.get(id);
   }
 
   /**
-   * registers the given condition.
+   * gets the condition via id.
+   *
+   * @param id the id to get.
+   *
+   * @return condition.
+   */
+  @NotNull
+  static Condition getOrThrow(@NotNull final String id) {
+    return Condition.get(id).orElseThrow(() ->
+      new IllegalStateException(String.format("Condition called %s not found!", id)));
+  }
+
+  /**
+   * registers the condition.
    *
    * @param condition the condition to register.
    */
   static void register(@NotNull final Condition condition) {
-    Conditions.register(condition);
+    Condition.REGISTRY.register(condition);
   }
 
   /**

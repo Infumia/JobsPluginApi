@@ -47,8 +47,8 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 dependencies {
     compileOnly "org.projectlombok:lombok"
     compileOnly "org.jetbrains:annotations"
-    compileOnly "com.github.Infumia.InfumiaLib:InfumiaCommon:2.3.7"
-    compileOnly "com.github.Infumia.InfumiaLib:InfumiaPaper:2.3.7"
+    compileOnly "tr.com.infumia:InfumiaCommon:1.0.0-SNAPSHOT"
+    compileOnly "tr.com.infumia:InfumiaPaper:1.0.0-SNAPSHOT"
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
 
     annotationProcessor "org.projectlombok:lombok"
