@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
+import tr.com.infumia.jobsplugin.paper.api.Mission;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 import tr.com.infumia.jobsplugin.paper.api.employee.Work;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * a class that represents employee job level change events which fire when level of the player's job change.

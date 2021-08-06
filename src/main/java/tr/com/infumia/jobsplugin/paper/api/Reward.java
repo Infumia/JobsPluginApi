@@ -1,4 +1,4 @@
-package tr.com.infumia.jobsplugin.paper.api.reward;
+package tr.com.infumia.jobsplugin.paper.api;
 
 import java.util.Optional;
 import lombok.AccessLevel;
@@ -7,19 +7,57 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tr.com.infumia.infumialib.registry.StringRegistry;
 import tr.com.infumia.infumialib.transformer.ObjectSerializer;
 import tr.com.infumia.infumialib.transformer.TransformedData;
 import tr.com.infumia.infumialib.transformer.declarations.GenericDeclaration;
-import tr.com.infumia.jobsplugin.paper.api.IdNameDescription;
-import tr.com.infumia.jobsplugin.paper.api.TypeSerializer;
 import tr.com.infumia.jobsplugin.paper.api.employee.Employee;
 import tr.com.infumia.jobsplugin.paper.api.employee.Work;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * an interface to determine rewards.
  */
 public interface Reward extends TypeSerializer<Reward>, IdNameDescription {
+
+  /**
+   * the instance.
+   */
+  StringRegistry<Reward> REGISTRY = new StringRegistry<>() {
+  };
+
+  /**
+   * gets the reward by id.
+   *
+   * @param id the id to get.
+   *
+   * @return reward.
+   */
+  @NotNull
+  static Optional<Reward> get(@NotNull final String id) {
+    return Reward.REGISTRY.get(id);
+  }
+
+  /**
+   * gets the reward via id.
+   *
+   * @param id the id to get.
+   *
+   * @return reward.
+   */
+  @NotNull
+  static Reward getOrThrow(@NotNull final String id) {
+    return Reward.get(id).orElseThrow(() ->
+      new IllegalStateException(String.format("Reward called %s not found!", id)));
+  }
+
+  /**
+   * registers the given reward.
+   *
+   * @param reward the reward to register.
+   */
+  static void register(@NotNull final Reward reward) {
+    Reward.REGISTRY.register(reward);
+  }
 
   /**
    * gives the reward to the player.

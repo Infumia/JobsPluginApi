@@ -8,10 +8,10 @@ import lombok.Setter;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
+import tr.com.infumia.jobsplugin.paper.api.Job;
+import tr.com.infumia.jobsplugin.paper.api.Mission;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobExpChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobLevelChangeEvent;
-import tr.com.infumia.jobsplugin.paper.api.job.Job;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
 
 /**
  * an interface to determine works.
@@ -40,7 +40,7 @@ public interface Work extends Callable {
    */
   @NotNull
   static Work of(@NotNull final Job job) {
-    return new Impl(job);
+    return Work.of(job, 0L, 0L);
   }
 
   /**
@@ -156,14 +156,5 @@ public interface Work extends Callable {
      */
     @Setter
     private long level;
-
-    /**
-     * ctor.
-     *
-     * @param job the job.
-     */
-    private Impl(@NotNull final Job job) {
-      this.job = job;
-    }
   }
 }
