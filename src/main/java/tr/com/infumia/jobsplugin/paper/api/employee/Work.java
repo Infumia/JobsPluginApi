@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobExpChangeEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJobLevelChangeEvent;
-import tr.com.infumia.jobsplugin.paper.api.job.Job;
-import tr.com.infumia.jobsplugin.paper.api.mission.Mission;
+import tr.com.infumia.jobsplugin.paper.api.Job;
+import tr.com.infumia.jobsplugin.paper.api.Mission;
 
 /**
  * an interface to determine works.
