@@ -10,11 +10,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.jetbrains.annotations.NotNull;
 import tr.com.infumia.jobsplugin.paper.api.Callable;
+import tr.com.infumia.jobsplugin.paper.api.Job;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeCloseEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeJoinJobEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeLoadEvent;
 import tr.com.infumia.jobsplugin.paper.api.event.EmployeeQuitJobEvent;
-import tr.com.infumia.jobsplugin.paper.api.Job;
 
 /**
  * an interface to determine player jobs.
