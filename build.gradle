@@ -48,7 +48,7 @@ dependencies {
     compileOnly "org.projectlombok:lombok"
     compileOnly "org.jetbrains:annotations"
     compileOnly "com.github.Infumia.InfumiaLib:InfumiaCommon:2.4.0"
-    compileOnly "com.github.Infumia.InfumiaLib:InfumiaPaper:2.4.0"
+    compileOnly "com.github.Infumia.InfumiaLib:InfumiaPaper:2.4.1"
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
 
     annotationProcessor "org.projectlombok:lombok"
