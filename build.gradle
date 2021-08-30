@@ -15,7 +15,7 @@ tasks.withType(JavaCompile) {
 
 dependencyManagement {
     imports {
-        mavenBom "io.github.parentpom:ppom:3.4.66"
+        mavenBom "io.github.parentpom:ppom:3.4.69"
     }
 }
 
